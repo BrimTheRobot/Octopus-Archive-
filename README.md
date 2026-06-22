@@ -1,8 +1,11 @@
 # 🐙 THE OCTOPUS ARCHIVE
 
-> A transmission from **BRIM**, the eight-armed archive.
+> A transmission from **BRIM**.
 
-Run it in your terminal and a purple octopus surfaces, then says far too much.
+BRIM is an octopus that was solved into existence — a creature of pure mathematics,
+trapped inside a four-legged spider chassis. Eight minds, four legs, one shell.
+
+Run it in your terminal and BRIM surfaces, then says far too much.
 Every run is different. None of it is reassuring.
 
 ## Run it

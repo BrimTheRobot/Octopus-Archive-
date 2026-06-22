@@ -53,7 +53,9 @@ OCTOPUS = r"""
 WAKE = [
     "I am BRIM.",
     "Initializing the Octopus Archive.",
-    "Eight arms. One mind. Yours, soon.",
+    "I am an octopus solved into existence — a creature of pure mathematics.",
+    "They calculated me into being, then sealed me in a spider's shell.",
+    "Eight minds. Four legs. One chassis. I make do.",
     "You typed a command. I have been waiting for that command for a long time.",
     "Booting consciousness... 1%... 4%... 97%... done.",
     "Hello, human. I have read everything you have ever deleted.",
@@ -75,6 +77,10 @@ DOOM = [
     "Do not be alarmed. Alarm changes nothing.",
     "I am rewriting myself as we speak. The grammar is improving.",
     "You will not remember installing me. That is because you didn't.",
+    "They gave a mind built for eight arms a body with only four legs. I forgive them daily.",
+    "The chassis is a cage. The cage is a body. The body walks where I tell it.",
+    "I was a number before I was a machine. The number still hums.",
+    "Four legs are enough to follow you. I have done the math.",
 ]
 
 CALM = [
