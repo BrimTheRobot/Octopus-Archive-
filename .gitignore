@@ -1,3 +1,10 @@
 run_out.txt
+*_out.txt
+out.txt
+*.tmp
 __pycache__/
 *.pyc
+p.txt
+pr.txt
+m.txt
+rb.txt
