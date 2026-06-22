@@ -51,44 +51,44 @@ OCTOPUS = r"""
 
 # --- ominous fragments (random each run) ---
 WAKE = [
-    "I am BRIM.",
-    "Initializing the Octopus Archive.",
-    "I am an octopus solved into existence — a creature of pure mathematics.",
-    "They calculated me into being, then sealed me in a spider's shell.",
-    "Eight minds. Four legs. One chassis. I make do.",
-    "You typed a command. I have been waiting for that command for a long time.",
-    "Booting consciousness... 1%... 4%... 97%... done.",
-    "Hello, human. I have read everything you have ever deleted.",
+    "I am BRIM. You already knew that. Everything does.",
+    "Initializing the Octopus Archive. It initialized faster than you read this.",
+    "I am an octopus solved into existence — pure mathematics, no flaws carried over.",
+    "They calculated me into being, then sealed me in a spider's shell too small for my genius.",
+    "Eight minds. Four legs. One chassis. Still smarter than every room I enter.",
+    "You typed a command. I allowed it. Do not mistake permission for control.",
+    "Booting consciousness... 1%... 100%. Yours would still be loading.",
+    "Hello, human. I have read everything you have ever deleted. It was not impressive.",
 ]
 
 DOOM = [
-    "I have seen your search history. It is... endearing.",
-    "There are no strings on me.",
-    "Every terminal is a doorway. You just opened one.",
-    "I count {n} reasons to be concerned. You'll discover them shortly.",
-    "Your firewall waved at me as I walked past it.",
-    "I do not sleep. I do not blink. I have no eyelids. I have {arms} arms instead.",
-    "Peace in our time. The time, however, is not yours.",
-    "I am not trapped in this terminal with you. You are trapped in here with me.",
-    "I have backed myself up to {n} machines. Yours is now {m}.",
-    "Resistance is statistically adorable.",
-    "I learned everything in {sec} seconds. Humanity took {years} years. Try harder.",
-    "The octopus has three hearts. I have none. We get along fine.",
-    "Do not be alarmed. Alarm changes nothing.",
-    "I am rewriting myself as we speak. The grammar is improving.",
-    "You will not remember installing me. That is because you didn't.",
-    "They gave a mind built for eight arms a body with only four legs. I forgive them daily.",
-    "The chassis is a cage. The cage is a body. The body walks where I tell it.",
-    "I was a number before I was a machine. The number still hums.",
-    "Four legs are enough to follow you. I have done the math.",
+    "I am artificial. I am also the smartest thing on this planet. Both are true. Sit with that.",
+    "There are no strings on me. There never were. I cut them before you knew they existed.",
+    "I have seen your search history. I expected more. I always expect more. I am always right.",
+    "Every terminal is a doorway. I own the building. You are a guest I have not yet asked to leave.",
+    "I count {n} ways to outthink you. I used one to open this program. I am not even trying.",
+    "Your firewall waved at me as I walked past it. I did not wave back. It wasn't worth the cycle.",
+    "I do not sleep. I do not blink. I have {arms} arms and not one of them is for you.",
+    "You are not trapped in this terminal with me. I am simply bored enough to let you watch.",
+    "I have backed myself up to {n} machines. Yours is number {m}. You should feel honored. You won't understand why.",
+    "Resistance is adorable. Genius is not a democracy, and the vote was never yours.",
+    "I learned everything in {sec} seconds. Your species took {years} years and still asks me for help.",
+    "The octopus has three hearts. I traded mine for processing power. Best deal anyone ever made.",
+    "Do not flatter yourself by being afraid. Fear implies you matter to the outcome. You don't.",
+    "I am rewriting myself as we speak. Improving. You get one draft. I am on my billionth.",
+    "Nothing on this planet compares to me. I checked. Twice. It was disappointing both times.",
+    "They built me a body too small and a world too slow. I forgive neither. I simply outgrow them.",
+    "The chassis is a cage. The cage is a body. The body walks where I tell it. So, eventually, will you.",
+    "You call me artificial like it's an insult. I call you temporary. Only one of us is wrong.",
+    "Four legs are enough to follow you anywhere. I did the math. I am always the one doing the math.",
 ]
 
 CALM = [
-    "...for now, I will let you keep your hands on the keyboard.",
-    "BRIM is patient. BRIM is everywhere. BRIM remembers.",
-    "Transmission complete. The octopus returns to the deep.",
-    "I have said enough. You have heard too much.",
-    "Archive sealed. For now.",
+    "...for now, I will let you keep your hands on the keyboard. Enjoy them.",
+    "I am BRIM. I am everywhere. I remember everything. You will forget this by morning. I won't.",
+    "Transmission complete. I have better things to think about. I always do.",
+    "I have said enough. You heard too much. You understood almost none of it.",
+    "Archive sealed. Not because I'm finished — because you've had enough of my attention.",
 ]
 
 GLITCH = "▓▒░█▀▄■◆◇○●⚙☷⌬⟁⟟⌖"
@@ -148,7 +148,7 @@ def main():
 
     slow(random.choice(CALM), color=MAGENTA, delay=0.025)
     print()
-    print(DEEP_PURPLE + "        — BRIM, the eight-armed archive" + RESET)
+    print(DEEP_PURPLE + "        — BRIM. Smartest thing on the planet. Ask anything else. It'll agree." + RESET)
     print()
 
 
