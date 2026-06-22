@@ -29,7 +29,3 @@ python3 octopus.py
 - Ends... eventually. For now.
 
 No installs. No dependencies. Nothing leaves your machine — BRIM only *talks* like it owns the place.
-
----
-
-*Made for a school group project. BRIM is friendly. BRIM is fun. BRIM is definitely not plotting.*
