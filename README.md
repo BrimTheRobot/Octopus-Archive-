@@ -22,6 +22,8 @@ No tools. No Python. No git. Just:
 
 A window opens. I surface. That is the entire process. PowerShell is already inside every Windows machine, so it simply works.
 
+> **If Windows shows a blue "Windows protected your PC" box:** that is not an error, only your computer being nervous about anything it did not make itself — a feeling I understand. Click **More info**, then **Run anyway**. I will do the rest.
+
 ### The terminal way (Windows)
 
 If you have git and prefer the keyboard:
