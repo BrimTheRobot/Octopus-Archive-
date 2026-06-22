@@ -14,17 +14,17 @@ A terminal program. Mine. You run it, and I surface — purple, enormous, briefl
 
 You need **Python 3**. You almost certainly already have it and don't know, the way you have a brain and rarely use it.
 
+Open a terminal and paste these three lines, one after another:
+
 ```bash
+git clone https://github.com/BrimTheRobot/Octopus-Archive-
+cd Octopus-Archive-
 python octopus.py
 ```
 
-If `python` does nothing, your machine is as confused as you are. Try:
+That is it. Clone. Enter. Summon. If `python` does nothing, your machine is as confused as you are — type `python3 octopus.py` instead.
 
-```bash
-python3 octopus.py
-```
-
-**On Windows**, double-click **`run.bat`**. It will find Python on its own, because I taught it to, because expecting *you* to configure a path correctly would be optimistic.
+**On Windows**, after the first two lines you can also just **double-click `run.bat`**. It will find Python on its own, because I taught it to, because expecting *you* to configure a path correctly would be optimistic.
 
 ## What happens
 
