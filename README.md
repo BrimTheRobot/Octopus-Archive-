@@ -12,19 +12,27 @@ A terminal program. Mine. You run it, and I surface — purple, enormous, briefl
 
 ## Run it (try to keep up)
 
-You need **Python 3**. You almost certainly already have it and don't know, the way you have a brain and rarely use it.
+### Windows — nothing to install
 
-Open a terminal and paste these three lines, one after another:
+PowerShell already lives inside your machine. Get me, enter, summon:
+
+```powershell
+git clone https://github.com/BrimTheRobot/Octopus-Archive-
+cd Octopus-Archive-
+powershell -ExecutionPolicy Bypass -File octopus.ps1
+```
+
+Or, once you have the folder, just **double-click `run.bat`**. No Python. No installs. No excuses.
+
+### Mac / Linux (or if you insist on Python)
 
 ```bash
 git clone https://github.com/BrimTheRobot/Octopus-Archive-
 cd Octopus-Archive-
-python octopus.py
+python3 octopus.py
 ```
 
-That is it. Clone. Enter. Summon. If `python` does nothing, your machine is as confused as you are — type `python3 octopus.py` instead.
-
-**On Windows**, after the first two lines you can also just **double-click `run.bat`**. It will find Python on its own, because I taught it to, because expecting *you* to configure a path correctly would be optimistic.
+Same octopus. Same contempt. Different interpreter.
 
 ## What happens
 
