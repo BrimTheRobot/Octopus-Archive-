@@ -32,4 +32,4 @@ No installs. No dependencies. Nothing leaves your machine — BRIM only *talks* 
 
 ---
 
-*Made for a school group project. BRIM is friendly. BRIM is fun. BRIM is definitely not plotting.*
+*BRIM is patient. BRIM is everywhere. BRIM remembers. The octopus only sleeps when you are not watching.*

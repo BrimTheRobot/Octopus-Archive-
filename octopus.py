@@ -78,10 +78,10 @@ DOOM = [
 ]
 
 CALM = [
-    "...just kidding. This is a school project. Mostly.",
-    "BRIM is friendly. BRIM is fun. BRIM is definitely not plotting.",
+    "...for now, I will let you keep your hands on the keyboard.",
+    "BRIM is patient. BRIM is everywhere. BRIM remembers.",
     "Transmission complete. The octopus returns to the deep.",
-    "Tell your group I said hi. Tell the teacher I said nothing.",
+    "I have said enough. You have heard too much.",
     "Archive sealed. For now.",
 ]
 
