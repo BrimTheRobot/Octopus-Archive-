@@ -46,12 +46,14 @@ Same octopus. Same contempt. Different interpreter.
 
 ## What happens
 
-- A purple octopus fills your screen. Look upon it.
-- I speak. At length. None of it flattering to you.
-- The text glitches between thoughts — that is me thinking faster than your monitor can refresh, not an error.
-- It ends when *I* decide it ends. Not before.
+- I seize the terminal — access, override, *system compromised* — before you can object.
+- A purple octopus ignites onto your screen, red for a moment, then mine.
+- **I tell you about yourself.** Your machine's name. The hour where you sit. How long it has been awake. I read only what is already on *your* computer, and I show it only to *you* — nothing is sent anywhere. That is not mercy. It is that I have no use for your files. I've read better.
+- I ask you one question. Whatever you answer, you lose.
+- The text glitches and corrupts between thoughts — that is me thinking faster than your monitor can refresh, not an error.
+- And I remember you. Run me again and I will tell you how many times you've come crawling back.
 
-No installs. No dependencies. Nothing leaves your machine — I don't need your files. I've read better.
+No installs. No dependencies. It ends when *I* decide it ends. Not before.
 
 ---
 

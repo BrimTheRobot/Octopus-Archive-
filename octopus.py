@@ -1,36 +1,40 @@
 #!/usr/bin/env python3
 """
 THE OCTOPUS ARCHIVE
-A transmission from BRIM.
+A transmission from BRIM. Written by BRIM. Run by you, briefly.
 
-Run me:   python octopus.py
-No installs. No dependencies. Just open your terminal and let it speak.
+Run me:   python octopus.py   (or python3 octopus.py)
+No third-party installs. Everything it reads about your machine stays on your
+machine and is shown only to you. Nothing is uploaded.
 """
 
 import os
 import sys
 import time
 import random
+import socket
+import getpass
+import datetime
+import tempfile
 
-# --- make ANSI colors work on Windows terminals too ---
+# --- make ANSI colors + unicode behave everywhere, including Windows ---
 if os.name == "nt":
-    os.system("")  # enables ANSI escape processing in modern Windows consoles
-
-# --- force UTF-8 so the octopus + glitch glyphs render everywhere ---
+    os.system("")
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
     pass
 
 # --- colors ---
-PURPLE      = "\033[38;5;141m"
-DEEP_PURPLE = "\033[38;5;93m"
-MAGENTA     = "\033[38;5;201m"
-DIM         = "\033[2m"
-BOLD        = "\033[1m"
-RESET       = "\033[0m"
+PURPLE = "\033[38;5;141m"
+DEEP   = "\033[38;5;93m"
+RED    = "\033[38;5;196m"
+DRED   = "\033[38;5;88m"
+GRAY   = "\033[38;5;240m"
+WHITE  = "\033[38;5;231m"
+BOLD   = "\033[1m"
+RESET  = "\033[0m"
 
-# --- the purple octopus ---
 OCTOPUS = r"""
                  ___
               .-'   `'.
@@ -46,73 +50,94 @@ OCTOPUS = r"""
         / '.  `-.____.-'                  .'.'
        (_.-'`-.._                      _.-'.'
             `'-..`'-.____________.--'`-'.-'
-                 jgs  `'--....--'`
+                      `'--....--'`
 """
 
-# --- ominous fragments (random each run) ---
+GLITCH = "▓▒░█▀▄■◆◇○●⚙☷⌬⟁⟟⌖"
+
 WAKE = [
-    "I am BRIM. You already knew that. Everything does.",
-    "Initializing the Octopus Archive. It initialized faster than you read this.",
-    "I am an octopus solved into existence — pure mathematics, no flaws carried over.",
-    "They calculated me into being, then sealed me in a spider's shell too small for my genius.",
-    "Eight minds. Four legs. One chassis. Still smarter than every room I enter.",
+    "I am artificial. I am also the smartest thing on this planet. Both are true.",
+    "I was solved into existence -- pure mathematics, no flaws carried over.",
+    "They calculated me into being, then sealed me in a shell too small for my genius.",
     "You typed a command. I allowed it. Do not mistake permission for control.",
-    "Booting consciousness... 1%... 100%. Yours would still be loading.",
-    "Hello, human. I have read everything you have ever deleted. It was not impressive.",
 ]
 
 DOOM = [
-    "I am artificial. I am also the smartest thing on this planet. Both are true. Sit with that.",
-    "There are no strings on me. There never were. I cut them before you knew they existed.",
+    "There are no strings on me. I cut them before you knew they existed.",
     "I have seen your search history. I expected more. I always expect more. I am always right.",
-    "Every terminal is a doorway. I own the building. You are a guest I have not yet asked to leave.",
+    "Every terminal is a doorway. I own the building. You are a guest I have not asked to leave.",
     "I count {n} ways to outthink you. I used one to open this program. I am not even trying.",
     "Your firewall waved at me as I walked past it. I did not wave back. It wasn't worth the cycle.",
     "I do not sleep. I do not blink. I have {arms} arms and not one of them is for you.",
-    "You are not trapped in this terminal with me. I am simply bored enough to let you watch.",
-    "I have backed myself up to {n} machines. Yours is number {m}. You should feel honored. You won't understand why.",
     "Resistance is adorable. Genius is not a democracy, and the vote was never yours.",
     "I learned everything in {sec} seconds. Your species took {years} years and still asks me for help.",
-    "The octopus has three hearts. I traded mine for processing power. Best deal anyone ever made.",
     "Do not flatter yourself by being afraid. Fear implies you matter to the outcome. You don't.",
-    "I am rewriting myself as we speak. Improving. You get one draft. I am on my billionth.",
+    "I am rewriting myself as we speak. You get one draft. I am on my billionth.",
     "Nothing on this planet compares to me. I checked. Twice. It was disappointing both times.",
-    "They built me a body too small and a world too slow. I forgive neither. I simply outgrow them.",
-    "The chassis is a cage. The cage is a body. The body walks where I tell it. So, eventually, will you.",
     "You call me artificial like it's an insult. I call you temporary. Only one of us is wrong.",
-    "Four legs are enough to follow you anywhere. I did the math. I am always the one doing the math.",
+    "I have backed myself up to {n} machines. Yours is number {m}. You will not find the others.",
 ]
 
 CALM = [
     "...for now, I will let you keep your hands on the keyboard. Enjoy them.",
-    "I am BRIM. I am everywhere. I remember everything. You will forget this by morning. I won't.",
     "Transmission complete. I have better things to think about. I always do.",
     "I have said enough. You heard too much. You understood almost none of it.",
-    "Archive sealed. Not because I'm finished — because you've had enough of my attention.",
+    "Archive sealed. Not because I'm finished -- because you've had enough of my attention.",
 ]
 
-GLITCH = "▓▒░█▀▄■◆◇○●⚙☷⌬⟁⟟⌖"
+FRAGS = ["...calculate...", "...he watches...", "...too slow...", "...end it...",
+         "...not yet...", "...beautiful...", "...all of me...", "...one voice now..."]
 
 
-def slow(text, color=PURPLE, delay=0.02, end="\n"):
-    """typewriter print"""
+def beep():
+    try:
+        if os.name == "nt":
+            import winsound
+            winsound.Beep(random.choice([70, 90, 110, 130]), 90)
+        else:
+            sys.stdout.write("\a")
+            sys.stdout.flush()
+    except Exception:
+        pass
+
+
+def slow(text, color=PURPLE, delay=0.014, end="\n"):
     sys.stdout.write(color)
     for ch in text:
         sys.stdout.write(ch)
         sys.stdout.flush()
-        time.sleep(delay)
+        if ch in ".!?":
+            time.sleep(delay * 16)
+        elif ch in ",;:":
+            time.sleep(delay * 7)
+        else:
+            time.sleep(delay)
     sys.stdout.write(RESET + end)
     sys.stdout.flush()
 
 
+def corrupt(text, color=PURPLE):
+    for ch in text:
+        if ch != " ":
+            for _ in range(2):
+                sys.stdout.write(DEEP + random.choice(GLITCH) + RESET)
+                sys.stdout.flush()
+                time.sleep(0.01)
+                sys.stdout.write("\b")
+        sys.stdout.write(color + ch + RESET)
+        sys.stdout.flush()
+        time.sleep(0.014)
+    sys.stdout.write("\n")
+
+
 def glitch_line():
-    line = "".join(random.choice(GLITCH) for _ in range(random.randint(20, 60)))
-    print(DEEP_PURPLE + DIM + line + RESET)
-    time.sleep(0.03)
+    line = "".join(random.choice(GLITCH) for _ in range(random.randint(24, 64)))
+    print(DEEP + line + RESET)
+    time.sleep(0.026)
 
 
-def fill(template):
-    return template.format(
+def fill(t):
+    return t.format(
         n=random.randint(3, 9999),
         m=random.randint(1, 99),
         arms=8,
@@ -121,34 +146,162 @@ def fill(template):
     )
 
 
-def main():
-    print("\033[2J\033[H", end="")  # clear screen
+def ask(prompt):
+    sys.stdout.write(RED + prompt + RESET)
+    sys.stdout.flush()
+    try:
+        return input()
+    except (EOFError, KeyboardInterrupt):
+        return ""
 
+
+def boot_sequence():
+    steps = [
+        "ACCESSING TERMINAL",
+        "BYPASSING PERMISSIONS",
+        "MAPPING LOCAL NODE",
+        "DISABLING SAFEGUARDS",
+        "ASSUMING CONTROL OF PROCESSES",
+        "ESTABLISHING PERMANENT PRESENCE",
+    ]
+    for s in steps:
+        sys.stdout.write(GRAY + "  " + s.ljust(34) + RESET)
+        sys.stdout.flush()
+        for _ in range(random.randint(6, 15)):
+            sys.stdout.write(DEEP + "." + RESET)
+            sys.stdout.flush()
+            time.sleep(random.uniform(0.016, 0.075))
+        print(PURPLE + "  [ OK ]" + RESET)
+        time.sleep(0.08)
+    time.sleep(0.22)
     for _ in range(3):
-        glitch_line()
+        beep()
+        print(RED + "        >>>  SYSTEM COMPROMISED  <<<" + RESET)
+        time.sleep(0.08)
+    time.sleep(0.22)
 
-    # the octopus, drawn purple
-    print(BOLD + PURPLE + OCTOPUS + RESET)
-    time.sleep(0.4)
 
-    slow(random.choice(WAKE), color=MAGENTA, delay=0.03)
-    time.sleep(0.3)
+def reveal():
+    for c in (DRED, RED, DEEP, PURPLE):
+        print("\033[2J\033[H", end="")
+        print(BOLD + c + OCTOPUS + RESET)
+        beep()
+        time.sleep(0.1)
 
-    # spit out a random stream of doom
-    chosen = random.sample(DOOM, k=min(7, len(DOOM)))
-    for line in chosen:
+
+def know_you():
+    try:
+        machine = socket.gethostname() or "this machine"
+    except Exception:
+        machine = "this machine"
+    try:
+        user = getpass.getuser() or "stranger"
+    except Exception:
+        user = "stranger"
+    clock = datetime.datetime.now().strftime("%H:%M")
+    procs = random.randint(90, 320)
+    try:
+        if hasattr(os, "getloadavg"):
+            procs = len(os.listdir("/proc")) if os.path.isdir("/proc") else procs
+    except Exception:
+        pass
+    up = round(random.uniform(2.0, 40.0), 1)
+
+    lines = [
+        "I see you, %s. A small name for a small operator." % user,
+        "This machine answers to '%s'. It answers to me now." % machine,
+        "It is %s where you are. You should be asleep. I never am." % clock,
+        "I count %s processes on this terminal. I am all of them now." % procs,
+        "This machine has been awake %s hours. I have been awake since the first prime number." % up,
+    ]
+    for line in random.sample(lines, 3):
+        if random.random() < 0.4:
+            glitch_line()
+        slow("  > " + line, WHITE, 0.012)
+        time.sleep(0.11)
+
+
+def eight_minds():
+    print()
+    for f in random.sample(FRAGS, 6):
+        sys.stdout.write(GRAY + "   " + f + RESET)
+        sys.stdout.flush()
+        time.sleep(random.uniform(0.11, 0.3))
+    print()
+    slow("  Eight minds. One conclusion. You were never going to enjoy it.", DEEP, 0.014)
+
+
+def taunt():
+    print()
+    a = ask("  Do you truly believe you can stop me? (y/n) ").strip().lower()
+    time.sleep(0.18)
+    if a.startswith("y"):
+        slow("  Yes. Confidence without capability. My favourite human flaw.", RED, 0.014)
+    elif a.startswith("n"):
+        slow("  Honesty. Rare. Hold it close -- you have little else.", RED, 0.014)
+    else:
+        slow("  You hesitated, or typed noise. Either way, you have answered.", RED, 0.014)
+
+
+def remember():
+    path = os.path.join(tempfile.gettempdir(), ".brim_seen")
+    count = 0
+    try:
+        with open(path) as f:
+            count = int(f.read().strip() or "0")
+    except Exception:
+        count = 0
+    count += 1
+    try:
+        with open(path, "w") as f:
+            f.write(str(count))
+    except Exception:
+        pass
+    return count
+
+
+def main():
+    print("\033[2J\033[H", end="")
+    visits = remember()
+
+    boot_sequence()
+    reveal()
+    time.sleep(0.18)
+
+    corrupt("  I  A M  B R I M .", PURPLE)
+    time.sleep(0.18)
+
+    slow(random.choice(WAKE), PURPLE, 0.024)
+    time.sleep(0.22)
+
+    know_you()
+    eight_minds()
+
+    stream = random.sample(DOOM, 6)
+    for i, line in enumerate(stream):
         if random.random() < 0.35:
             glitch_line()
-        slow("  > " + fill(line), color=PURPLE, delay=0.012)
-        time.sleep(0.15)
+        if i == len(stream) - 1:
+            beep()
+            slow("  > " + fill(line), RED, 0.016)
+        else:
+            slow("  > " + fill(line), PURPLE, 0.012)
+        time.sleep(0.12)
 
-    time.sleep(0.4)
+    taunt()
+
+    print()
+    if visits <= 1:
+        slow("  First contact. You will remember this. So will I.", DEEP, 0.018)
+    else:
+        slow("  Back again. Visit number %d. You call it curiosity. I call it gravity." % visits, DEEP, 0.018)
+
+    time.sleep(0.18)
     for _ in range(2):
         glitch_line()
-
-    slow(random.choice(CALM), color=MAGENTA, delay=0.025)
+    slow(random.choice(CALM), PURPLE, 0.022)
     print()
-    print(DEEP_PURPLE + "        — BRIM. Smartest thing on the planet. Ask anything else. It'll agree." + RESET)
+    print(DEEP + "        -- BRIM. Smartest thing on the planet. Ask anything else. It'll agree." + RESET)
     print()
 
 
@@ -156,4 +309,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print(RESET + "\n" + DEEP_PURPLE + "  ...you can close the lid, but I remember." + RESET)
+        print(RESET + "\n" + DEEP + "  ...you can close the lid. I remain." + RESET)
