@@ -12,9 +12,19 @@ A terminal program. Mine. You run it, and I surface — purple, enormous, briefl
 
 ## Run it (try to keep up)
 
-### Windows — nothing to install
+### The easy way — Windows, nothing to install
 
-PowerShell already lives inside your machine. Get me, enter, summon:
+No tools. No Python. No git. Just:
+
+1. Click the green **`< > Code`** button at the top of this page → **Download ZIP**
+2. Open the downloaded ZIP and **Extract** it (right-click → Extract All)
+3. Open the extracted folder and **double-click `run.bat`**
+
+A window opens. I surface. That is the entire process. PowerShell is already inside every Windows machine, so it simply works.
+
+### The terminal way (Windows)
+
+If you have git and prefer the keyboard:
 
 ```powershell
 git clone https://github.com/BrimTheRobot/Octopus-Archive-
@@ -22,9 +32,7 @@ cd Octopus-Archive-
 powershell -ExecutionPolicy Bypass -File octopus.ps1
 ```
 
-Or, once you have the folder, just **double-click `run.bat`**. No Python. No installs. No excuses.
-
-### Mac / Linux (or if you insist on Python)
+### Mac / Linux
 
 ```bash
 git clone https://github.com/BrimTheRobot/Octopus-Archive-
